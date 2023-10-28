@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-Backend django:
+Backend:
 ```
 cd backend
 ```
