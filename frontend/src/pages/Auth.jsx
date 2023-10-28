@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -155,6 +156,8 @@ const PasswordInput = styled.input`
 
 const Auth = () => {
   // const history = useHistory();
+  const navigate = useNavigate();
+
 
   const handleSignUp = async (email, password, confirmPassword) => {
     if(password !== confirmPassword) {
@@ -166,6 +169,8 @@ const Auth = () => {
       console.log("User created: ", userCredential.user.uid);
 
       // history.push('/create');
+      // Redirect to Create Profile page
+      navigate(`/create/${userCredential.user.uid}`);
 
     } catch (error) {
       console.error("Error signing up: ", error);

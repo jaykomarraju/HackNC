@@ -15,8 +15,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Auth />} />
-        <Route path="/create" element={<CreateProfile />} />
-        <Route path="/createaddr" element={<CreateProfile2 />} />
+        <Route path="/create/:userId" element={<CreateProfile />} />
+        <Route path="/createaddr/:userId" element={<CreateProfile2 />} />
         <Route path="/checking" element={<Checking />} />
         <Route path="/savings" element={<Savings />} />
         <Route path="/profile" element={<Profile />} />

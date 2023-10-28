@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { db } from "../firebaseConfig";
+import { set, ref } from "firebase/database";
+import { useParams } from "react-router-dom";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   background-color: #7bafd4;
@@ -152,19 +158,104 @@ const PasswordInput = styled.input`
 `;
 
 const CreateProfile = () => {
+  // Assume userId is available
+  const userId = useParams();
+  console.log(userId);
+
+  useEffect(() => {
+    const auth = getAuth();
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setEmail(user.email);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  const navigate = useNavigate();
+
+  const saveUserData = (userId, userData) => {
+    if (typeof userId === "string" && userId.length > 0) {
+      const userRef = ref(db, `users/${userId}`);
+      set(userRef, userData)
+        .then(() => {
+          console.log("User data saved successfully");
+        })
+        .catch((error) => {
+          console.error("Failed to save user data", error);
+        });
+    } else {
+      console.error("Invalid userId");
+    }
+  };
+
+  // Initialize state variables
+  const [legalName, setLegalName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [dob, setDob] = useState("");
+  const [email, setEmail] = useState("");
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+
+  //   const userData = {
+  //     legalName,
+  //     phoneNumber,
+  //     dob,
+  //   };
+
+  //   saveUserData(userId, userData);
+
+  //   // Redirect to Create Profile page
+  //   navigate('/createaddr');
+  // };
+
+  // Usage:
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const uuid = userId; // Make sure this is valid and obtained correctly
+    const userData = {
+      name: legalName,
+      //   get the email from the user object
+      //   email: user,
+      email: email,
+      phoneNumber: phoneNumber,
+      dob: dob,
+      // other fields
+    };
+
+    saveUserData(uuid.userId, userData);
+    // Redirect to Create Profile page
+    navigate(`/createaddr/${uuid.userId}`);
+  };
+
   return (
     <Container>
-      <BackgroundImage src={require("../assets/BackgroundEmailLanding.png")} />
-
-      <Form>
+      {/* ... (No changes here) */}
+      <Form onSubmit={handleSubmit}>
+        {" "}
+        {/* <-- Add onSubmit handler */}
         <Title>Create Profile</Title>
-
-        <Input placeholder="Legal Name" />
-        <Input placeholder="555-555-5555" type="tel" />
-        <Input type="date" placeholder="Date of Birth" />
-
+        <Input
+          placeholder="Legal Name"
+          value={legalName}
+          onChange={(e) => setLegalName(e.target.value)}
+        />
+        <Input
+          placeholder="555-555-5555"
+          type="tel"
+          value={phoneNumber}
+          onChange={(e) => setPhoneNumber(e.target.value)}
+        />
+        <Input
+          type="date"
+          placeholder="Date of Birth"
+          value={dob}
+          onChange={(e) => setDob(e.target.value)}
+        />
         {/* <Button>Connect Wallet</Button> */}
-        <LinkButton to="/createaddr">Next</LinkButton>
+        <Button type="submit">Next</Button> {/* <-- Change to type "submit" */}
         <UnStyledLink to="/login">Login</UnStyledLink>
       </Form>
     </Container>

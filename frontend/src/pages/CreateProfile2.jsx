@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { db } from "../firebaseConfig";
+import { update, ref, child } from "firebase/database";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
 
 const Container = styled.div`
   background-color: #7bafd4;
@@ -172,24 +177,67 @@ const PasswordInput = styled.input`
 `;
 
 const CreateProfile2 = () => {
+    const [address1, setAddress1] = useState("");
+  const [address2, setAddress2] = useState("");
+  const [city, setCity] = useState("");
+  const [state, setState] = useState("");
+  const [zip, setZip] = useState("");
+  const [country, setCountry] = useState("");
+
+  const { userId } = useParams();  // Fetch userId from params
+
+  const navigate = useNavigate();
+
+  
+
+
+  const updateUserAddress = (userId, addressData) => {
+    if (typeof userId === "string" && userId.length > 0) {
+      const userRef = ref(db, `users/${userId}`);
+      update(userRef, { address: addressData })  // Update only the 'address' field
+        .then(() => {
+          console.log("User address updated successfully");
+        })
+        .catch((error) => {
+          console.error("Failed to update user address", error);
+        });
+    } else {
+      console.error("Invalid userId");
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    const addressData = {
+      address1,
+      address2,
+      city,
+      state,
+      zip,
+      country
+    };
+
+    updateUserAddress(userId, addressData);  // Update address in the database
+
+    // Redirect to the user profile page
+    // navigate(`/profile/${userId}`);
+    navigate(`/profile`);
+
+
+  };
+
   return (
     <Container>
-      <BackgroundImage src={require("../assets/BackgroundEmailLanding.png")} />
-
-      <Form>
-        {/* <Title>Address</Title> */}
-        <Subtitle>Address</Subtitle>
-       
-        <Input placeholder="Address Line 1"/>
-        <Input placeholder="Address Line 2"/>
-        <Input placeholder="City"/>
-        <Input placeholder="State"/>
-        <Input placeholder="Zip Code"/>
-        <Input placeholder="Country"/>
-        
-        {/* <Button>Connect Wallet</Button> */}
-        <LinkButton to="/checking">Sign Up</LinkButton>
-        <UnStyledLink to="/login">Login</UnStyledLink>
+      <Form onSubmit={handleSubmit}> {/* Add onSubmit handler here */}
+        {/* ... (rest of your code) */}
+        <Input placeholder="Address Line 1" value={address1} onChange={(e) => setAddress1(e.target.value)} />
+        <Input placeholder="Address Line 2" value={address2} onChange={(e) => setAddress2(e.target.value)} />
+        <Input placeholder="City" value={city} onChange={(e) => setCity(e.target.value)} />
+        <Input placeholder="State" value={state} onChange={(e) => setState(e.target.value)} />
+        <Input placeholder="Zip Code" value={zip} onChange={(e) => setZip(e.target.value)} />
+        <Input placeholder="Country" value={country} onChange={(e) => setCountry(e.target.value)} />
+        <Button type="submit">Sign Up</Button> {/* Change to type "submit" */}
       </Form>
     </Container>
   );
