@@ -7,6 +7,7 @@ import Profile from './pages/Profile';
 import Auth from './pages/Auth';
 import CreateProfile from './pages/CreateProfile';
 import CreateProfile2 from './pages/CreateProfile2';
+import Login from './pages/Login';
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/checking" element={<Checking />} />
         <Route path="/savings" element={<Savings />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
