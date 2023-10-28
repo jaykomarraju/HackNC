@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+import { auth } from '../firebaseConfig';
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const Container = styled.div`
   background-color: #7bafd4;
@@ -151,11 +154,38 @@ const PasswordInput = styled.input`
 `;
 
 const Auth = () => {
+  // const history = useHistory();
+
+  const handleSignUp = async (email, password, confirmPassword) => {
+    if(password !== confirmPassword) {
+      console.error("Passwords do not match.");
+      return;
+    }
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+      console.log("User created: ", userCredential.user.uid);
+
+      // history.push('/create');
+
+    } catch (error) {
+      console.error("Error signing up: ", error);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+    const password = e.target[1].value;
+    const confirmPassword = e.target[2].value;
+    handleSignUp(email, password, confirmPassword);
+
+  };
+
   return (
     <Container>
       <BackgroundImage src={require("../assets/BackgroundEmailLanding.png")} />
 
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Title>EquiB</Title>
         <Subtitle>
           Creating Financial Freedom for the Unbanked: EquiB's Decentralized
@@ -165,7 +195,7 @@ const Auth = () => {
         <PasswordInput placeholder="Password" type="password" />
         <PasswordInput placeholder="Confirm Password" type="password" />
         {/* <Button>Connect Wallet</Button> */}
-        <LinkButton to="/create">Sign Up</LinkButton>
+        <Button type="submit">Sign Up</Button>
         <UnStyledLink to="/login">Login</UnStyledLink>
       </Form>
     </Container>

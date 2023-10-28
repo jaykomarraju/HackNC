@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styled from "styled-components";
 import BottomNavBar from "../components/BottomNavBar";
 
@@ -114,6 +114,10 @@ const RightTextDiv = styled.div`
 `;
 
 const Profile = () => {
+
+  
+
+
   return (
     <Container>
       <BottomNavBar/>
