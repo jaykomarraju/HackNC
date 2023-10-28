@@ -1,5 +1,37 @@
 # HackNC
 
+Setup:
+
+Frontend:
+```
+cd frontend
+npm install
+npm start
+```
+
+Backend django:
+```
+cd backend
+```
+Activate the virtual environment:
+
+On macOS and Linux:
+```
+source venv/bin/activate
+```
+On Windows:
+```
+.\venv\Scripts\activate
+```
+Install Flask:
+```
+pip install Flask
+```
+Run the server:
+```
+FLASK_APP=app.py flask run
+```
+
 Problem:
 
 MVP (Minimum Viable Product):
