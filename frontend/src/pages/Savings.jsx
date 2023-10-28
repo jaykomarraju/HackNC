@@ -7,7 +7,8 @@ import BottomNavBar from "../components/BottomNavBar";
 const Container = styled.div`
   background-color: #fff;
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
+  margin-bottom:80px;
   display: flex;
   flex-direction: column;
   align-items: center;
