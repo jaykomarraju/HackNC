@@ -10,6 +10,11 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 80px;
+
+  @media (max-width: 768px) {
+    height: 100%;
+  }
+
 `;
 
 const CenterWrapper = styled.div`
@@ -22,12 +27,23 @@ width: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 768px) {
+    height: 100%;
+  }
+
 `;
 
 const PageTitle = styled.h1`
   font-size: 40px;
   margin-top: 20px;
   margin-bottom: 50px;
+
+  @media (max-width: 768px) {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+
 `;
 
 const TopFlex = styled.div`
@@ -39,6 +55,11 @@ const TopFlex = styled.div`
   border: 1.5px solid black;
   border-radius: 20px;
   padding: 20px;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+
 `;
 
 const TopRightFlex = styled.div`
@@ -47,35 +68,67 @@ const TopRightFlex = styled.div`
   align-items: flex-end;
   justify-content: space-between;
   width: 50%;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+  }
+
 `;
 
 const ProfilePicture = styled.img`
   width: 200px;
   height: 200px;
   border-radius: 50%;
+
+  @media (max-width: 768px) {
+    width: 150px;
+    height: 150px;
+  }
+
 `;
 
 const LegalNameLabel = styled.h2`
   font-size: 18px;
   font-weight: 400;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
+
 `;
 
 const LegalName = styled.h2`
   font-size: 24px;
   margin: 0;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const EmailLabel = styled.h2`
   font-size: 18px;
   font-weight: 400;
   text-transform: uppercase;
+
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
+
 `;
 const Email = styled.h2`
   font-size: 24px;
   margin: 0;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
+
 `;
 
 // make the bottom flex a grid with 3 elements per row
@@ -89,6 +142,11 @@ const BottomFlex = styled.div`
   border-radius: 20px;
   padding: 20px;
 
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(1, 1fr);
+    width: 100%;
+  }
+
 `;
 
 const Label = styled.h2`
@@ -96,11 +154,20 @@ const Label = styled.h2`
   font-weight: 400;
   text-transform: uppercase;
 
+  @media (max-width: 768px) {
+    margin-top: 20px;
+  }
+
+
 `;
 
 const Info = styled.h2`
   font-size: 24px;
   font-weight: 500;
+
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
 `;
 
 const RightTextDiv = styled.div`
@@ -111,6 +178,12 @@ const RightTextDiv = styled.div`
   margin-top: 20px;
   // background:pink;
   padding: 10px;
+
+  @media (max-width: 768px) {
+    width: 100%;
+    align-items: center;
+    margin-top: 20px;
+  }
 `;
 
 const Profile = () => {
