@@ -219,13 +219,13 @@ const Profile = () => {
         <Info>01/01/2000</Info></RightTextDiv>
         <RightTextDiv>
         <Label>Wallet Address for Checking</Label>
-        <Info>0x1234567890</Info></RightTextDiv>
+        <Info>0xeac984f7ed1bf5e668f740daf36eba70da93c953</Info></RightTextDiv>
         <RightTextDiv>
         <Label>Wallet Address for Savings</Label>
-        <Info>0x1234567890</Info></RightTextDiv>
+        <Info>018b7c72-cbac-7ec8-bffe-91a0a29a2530</Info></RightTextDiv>
         <RightTextDiv>
         <Label>Account Active Since</Label>
-        <Info>01/01/2020</Info></RightTextDiv>
+        <Info>10/29/2023</Info></RightTextDiv>
       </BottomFlex>
     </Container>
   );
