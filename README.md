@@ -1,7 +1,7 @@
 # HackNC
 
 ## EquiB
-- We started this project to enable accessible banking in the world. There’s over a billion people with no bank access in the world. Our aim is to provide a scalable mobile interface that allows financial equity for all. Our product, EquiB is a web based banking app where users are able to generate and store a crypto wallet. This allows users to transact using the Circle crypto systems to allow for abstraction of complicated crypto processes. 
+- We started this project to enable accessible banking in the world. There’s over a billion people with no bank access in the world. Our aim is to provide a scalable mobile interface that allows financial equity for all. Our product, EquiB is a web based banking app where users are able to generate and store a crypto wallet. This allows users to transact using the Circle crypto systems — particularly developer controlled wallets (MATIC-MUMBAI) — to allow for abstraction of complicated crypto processes to a simple web2-like UI for user signing. This way we create can create a fully web & public blockchain based banking application.
 - Due to a lack of access to banking services in underserved communities, we wanted to bridge the gap by providing a wallet for users to safely store their money. We also wanted to provide P2P transfer systems, and allow users to earn a yield on their investment on our savings platform. Using the blockchain to allow users to quickly and securely transfer money according to their needs.
 
 Setup:
