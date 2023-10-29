@@ -1,6 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+
+import { auth } from '../firebaseConfig';
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 const Container = styled.div`
   background-color: #7bafd4;
@@ -151,11 +155,29 @@ const PasswordInput = styled.input`
 `;
 
 const Login = () => {
+    const navigate = useNavigate();
+  
+    const handleLogin = async (email, password) => {
+      try {
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        console.log("User logged in: ", userCredential.user.uid);
+        navigate('/profile/');  // Navigate to checking page on successful login
+      } catch (error) {
+        console.error("Error logging in: ", error);
+      }
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      const email = e.target[0].value;
+      const password = e.target[1].value;
+      handleLogin(email, password);
+    };
   return (
     <Container>
       <BackgroundImage src={require("../assets/BackgroundEmailLanding.png")} />
 
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Title>EquiB</Title>
         <Subtitle>
           Creating Financial Freedom for the Unbanked: EquiB's Decentralized
@@ -164,7 +186,7 @@ const Login = () => {
         <Input placeholder="Email Address" />
         <PasswordInput placeholder="Password" type="password" />
         {/* <Button>Connect Wallet</Button> */}
-        <LinkButton to="/checking">Login</LinkButton>
+        <Button type="submit">Login</Button>
         <UnStyledLink to="/">Sign Up</UnStyledLink>
       </Form>
     </Container>
