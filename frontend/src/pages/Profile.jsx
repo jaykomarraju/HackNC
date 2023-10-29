@@ -183,7 +183,7 @@ const RightTextDiv = styled.div`
     width: 100%;
     align-items: center;
     margin-top: 20px;
-  }
+  } 
 `;
 
 const Profile = () => {
@@ -213,7 +213,7 @@ const Profile = () => {
         <Info>555-555-5555</Info></RightTextDiv>
         <RightTextDiv>
         <Label>Address</Label>
-        <Info>123 Main St. Anytown, USA 12345</Info></RightTextDiv>
+        <Info>123 Main St. Anytown, NC, USA 12345</Info></RightTextDiv>
         <RightTextDiv>
         <Label>Date of Birth</Label>
         <Info>01/01/2000</Info></RightTextDiv>
