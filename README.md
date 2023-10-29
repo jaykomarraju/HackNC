@@ -9,7 +9,7 @@ npm install
 npm start
 ```
 
-Backend:
+Circle Wallet Creation App (create_wallet.py):
 ```
 cd backend
 ```
@@ -23,13 +23,11 @@ On Windows:
 ```
 .\venv\Scripts\activate
 ```
-Install Flask:
+Install Dependencies in the file
+
+Run the code:
 ```
-pip install Flask
-```
-Run the server:
-```
-FLASK_APP=app.py flask run
+python create_wallet.py
 ```
 
 Problem:
