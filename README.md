@@ -37,4 +37,4 @@ MVP (Minimum Viable Product):
 
 Features:
 
-Team: Jay, Bennett, Kevin, Trevor
+Team: [Jay](https://github.com/jaykomarraju/), [Bennett](https://github.com/bennettzug), [Trevor](https://github.com/bobby-cmd/)
