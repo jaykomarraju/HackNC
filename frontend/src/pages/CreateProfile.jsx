@@ -5,6 +5,8 @@ import { db } from "../firebaseConfig";
 import { set, ref } from "firebase/database";
 import { useParams } from "react-router-dom";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import axios from "axios";
+import { getFunctions, httpsCallable } from "firebase/functions";
 
 import { useNavigate } from "react-router-dom";
 
@@ -160,6 +162,10 @@ const PasswordInput = styled.input`
 const CreateProfile = () => {
   // Assume userId is available
   const userId = useParams();
+
+  const functions = getFunctions();
+  const createWallet = httpsCallable(functions, 'createWallet');
+
   console.log(userId);
 
   useEffect(() => {
@@ -211,23 +217,31 @@ const CreateProfile = () => {
   //   navigate('/createaddr');
   // };
 
-  // Usage:
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const uuid = userId; // Make sure this is valid and obtained correctly
+    const uuid = userId; // Make sure this is the Firebase uid
     const userData = {
       name: legalName,
-      //   get the email from the user object
-      //   email: user,
       email: email,
       phoneNumber: phoneNumber,
       dob: dob,
-      // other fields
     };
-
     saveUserData(uuid.userId, userData);
-    // Redirect to Create Profile page
-    navigate(`/createaddr/${uuid.userId}`);
+
+    try {
+      // Create wallet using Firebase Function
+      const result = await createWallet({
+        /* any data you want to send */
+      });
+      console.log("Wallet created: ", result.data);
+
+      // You can save walletId to the user's data in Firebase here if needed
+
+      // Navigate to the next page
+      navigate(`/createaddr/${userId.userId}`);
+    } catch (error) {
+      console.log("Error creating wallet: ", error);
+    }
   };
 
   return (

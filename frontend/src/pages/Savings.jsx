@@ -82,25 +82,35 @@ const InterestHeading = styled.h2`
 const InterestAPRDisplay = styled.div`
   display: flex;
   flex-direction: row;
+  // background:lightgreen;
+  align-items: center;
+
+  // padding: 20px;
 `;
 
 const InterestAPRHeading = styled.h2`
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 400;
+  padding-right: 20px;
 `;
 
 const InterestAPRAmount = styled.h2`
   font-size: 30px;
+  font-weight: 400;
 `;
 
 const InterestEarnedDisplay = styled.div`
   display: flex;
   flex-direction: row;
+  // background:lightgreen;
+  align-items: center;
+
 `;
 
 const InterestEarnedHeading = styled.h2`
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 400;
+  padding-right: 20px;
 `;
 
 const InterestEarnedAmount = styled.h2`
@@ -112,8 +122,16 @@ const Button = styled.button`
   height: 40px;
   margin-top: 40px;
   border-radius: 40px;
+  font-size: 20px;
+  margin:40px;
   border: 1.5px solid #000000;
   background-color: #fff;
+
+  &:hover {
+    background-color: #000;
+    color: #fff;
+  }
+
 `;
 
 const ButtonFlexer = styled.div`
@@ -131,17 +149,17 @@ const Savings = () => {
       <PageTitle>Savings</PageTitle>
       <BalanceDisplayContainer>
         <BalanceHeading>Balance:</BalanceHeading>
-        <BalanceAmount>$0.00</BalanceAmount>
+        <BalanceAmount>$1,000</BalanceAmount>
       </BalanceDisplayContainer>
       <InterestInformationContainer>
         <InterestHeading>Interest Information:</InterestHeading>
         <InterestAPRDisplay>
           <InterestAPRHeading>APR:</InterestAPRHeading>
-          <InterestAPRAmount>0.00%</InterestAPRAmount>
+          <InterestAPRAmount>3.25%</InterestAPRAmount>
         </InterestAPRDisplay>
         <InterestEarnedDisplay>
           <InterestEarnedHeading>Interest Earned:</InterestEarnedHeading>
-          <InterestEarnedAmount>$0.00</InterestEarnedAmount>
+          <InterestEarnedAmount>$2.02</InterestEarnedAmount>
         </InterestEarnedDisplay>
       </InterestInformationContainer>
       <ButtonFlexer>

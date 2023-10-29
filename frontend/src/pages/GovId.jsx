@@ -1,10 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
+import { useParams } from "react-router-dom";
+import { db } from "../firebaseConfig";
+import { update, ref, child } from "firebase/database";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios';
-import { auth } from '../firebaseConfig';
-import { createUserWithEmailAndPassword } from "firebase/auth";
+
 
 const Container = styled.div`
   background-color: #7bafd4;
@@ -16,11 +17,25 @@ const Container = styled.div`
 
   position: relative;
 
+
   // @media (max-width: 768px) {
   //   height: 100%;
   // }
+
+
 `;
 
+const CenterWrapper = styled.div`
+position: absolute;
+width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
 const Form = styled.form`
   background-color: #ffffff;
   border-radius: 20px;
@@ -29,6 +44,7 @@ const Form = styled.form`
   align-items: center;
   opacity: 0.9;
   padding:50px;
+  width: 40%;
 
   position: absolute;
   top: 50%;
@@ -68,6 +84,7 @@ const Button = styled.button`
   font-size: 20px;
   font-weight: 400;
 
+
   &:hover {
     background-color: #000;
     color: #fff;
@@ -77,6 +94,7 @@ const Button = styled.button`
     width: 70%;
     font-size: 16px;
   }
+
 `;
 
 const LinkButton = styled(Link)`
@@ -104,6 +122,7 @@ const LinkButton = styled(Link)`
     width: 70%;
     font-size: 16px;
   }
+
 `;
 
 const BackgroundImage = styled.img`
@@ -116,7 +135,7 @@ const BackgroundImage = styled.img`
 
 const Title = styled.h1`
   font-size: 40px;
-  font-weight: 400;
+  font-weight: 400  ;
   color: #000;
   margin: 0;
 `;
@@ -131,14 +150,17 @@ const Subtitle = styled.h2`
 
 const UnStyledLink = styled(Link)`
   text-decoration: none;
-  color: #000;
-  text-transform: uppercase;
-  margin-top: 50px;
+color:#000;
+text-transform: uppercase;
+margin-top: 50px;
 
-  &:hover {
-    font-weight: 600;
-  }
-`;
+&:hover {
+  font-weight: 600;
+}
+
+
+`
+
 
 const PasswordInput = styled.input`
   width: 100%;
@@ -154,63 +176,31 @@ const PasswordInput = styled.input`
   }
 `;
 
-const Auth = () => {
-  // const history = useHistory();
+const GovId = () => {
+
+  const { userId } = useParams();  // Fetch userId from params
+
   const navigate = useNavigate();
 
-
-  const handleSignUp = async (email, password, confirmPassword) => {
-    if (password !== confirmPassword) {
-      console.error("Passwords do not match.");
-      return;
-    }
-    try {
-      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-      console.log("User created: ", userCredential.user.uid);
-  
-      try {
-        await axios.post('https://us-central1-banking-d82ed.cloudfunctions.net/createUserAtCircle', {
-          userId: userCredential.user.uid
-        });
-      } catch (error) {
-        console.error("Error creating user at Circle:", error);
-      }
-  
-      // Redirect to Create Profile page
-      navigate(`/create/${userCredential.user.uid}`);
-    } catch (error) {
-      console.error("Error signing up:", error);
-    }
-  };
-
   const handleSubmit = (e) => {
+    // test
     e.preventDefault();
-    const email = e.target[0].value;
-    const password = e.target[1].value;
-    const confirmPassword = e.target[2].value;
-    handleSignUp(email, password, confirmPassword);
+    console.log("Submit");
+    // test
+  }
 
-  };
+  
 
   return (
     <Container>
-      <BackgroundImage src={require("../assets/BackgroundEmailLanding.png")} />
-
-      <Form onSubmit={handleSubmit}>
-        <Title>EquiB</Title>
-        <Subtitle>
-          Creating Financial Freedom for the Unbanked: EquiB's Decentralized
-          Wallet with Checking and Savings
-        </Subtitle>
-        <Input placeholder="Email Address" />
-        <PasswordInput placeholder="Password" type="password" />
-        <PasswordInput placeholder="Confirm Password" type="password" />
-        {/* <Button>Connect Wallet</Button> */}
-        <Button type="submit">Sign Up</Button>
-        <UnStyledLink to="/login">Login</UnStyledLink>
+      <Form onSubmit={handleSubmit}> {/* Add onSubmit handler here */}
+        <Title>Upload Government ID</Title>
+        {/* ... (rest of your code) */}
+        <Input type="file" />
+        <Button type="submit">Sign Up</Button> {/* Change to type "submit" */}
       </Form>
     </Container>
   );
 };
 
-export default Auth;
+export default GovId;
